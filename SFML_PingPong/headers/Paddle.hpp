@@ -23,4 +23,6 @@ class Paddle
 
     void incrementScore();
     size_t getScore() const;
+    void speedUpForFullscreen();
+    void resetSpeed();
 };

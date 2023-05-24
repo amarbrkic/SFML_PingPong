@@ -66,6 +66,16 @@ void Game::initPlayers(size_t width, size_t height)
     this->playerTwo =
         Paddle(static_cast<float>(width) * 0.93f,
                static_cast<float>(height) * 0.5f - playerTwo.getShape().getSize().y * 0.5f, width, height);
+    if (fullscreen)
+    {
+        playerOne.speedUpForFullscreen();
+        playerTwo.speedUpForFullscreen();
+    }
+    else
+    {
+        playerOne.resetSpeed();
+        playerTwo.resetSpeed();
+    }
 }
 
 void Game::initFullscreen()
@@ -139,6 +149,8 @@ void Game::updatePollEvents()
                 switchRefreshRate();
             if (event.key.code == sf::Keyboard::P)
                 paused = !paused;
+            if (event.key.code == sf::Keyboard::Space)
+                ball.randomizeSpeedOfMovement();
             break;
         }
     }
@@ -200,7 +212,7 @@ void Game::updateFPS()
     fpsText.setString(std::to_string(fps));
 }
 
-bool Game::checkCollisionUp(Paddle* paddle)
+bool Game::checkCollisionUp(Paddle *paddle)
 {
     if (paddle->getShape().getPosition().y < 0)
     {
@@ -209,7 +221,7 @@ bool Game::checkCollisionUp(Paddle* paddle)
     return false;
 }
 
-bool Game::checkCollisionDown(Paddle* paddle)
+bool Game::checkCollisionDown(Paddle *paddle)
 {
     if (paddle->getShape().getPosition().y + paddle->getShape().getSize().y > windowHeight)
     {

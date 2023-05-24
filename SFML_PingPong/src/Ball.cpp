@@ -1,16 +1,16 @@
 #include "../headers/Ball.hpp"
 
-Ball::Ball(float xPosition, float yPosition, float radius, sf::Color color,float speedOfMovementX, float speedOfMovementY)
+Ball::Ball(float xPosition, float yPosition, float radius, sf::Color color, float speedOfMovementX,
+           float speedOfMovementY)
 {
-    this->randomizeSpeedOfMovement();
     this->shape.setPosition(xPosition, yPosition);
     this->shape.setRadius(radius);
     this->shape.setFillColor(color);
-    this->speedOfMovementX = speedOfMovementX;
-    this->speedOfMovementY = speedOfMovementY;
+    this->speedOfMovementX = 0.f;
+    this->speedOfMovementY = 0.f;
 }
 
-sf::CircleShape& Ball::getShape()
+sf::CircleShape &Ball::getShape()
 {
     return this->shape;
 }
@@ -46,6 +46,6 @@ void Ball::randomizeSpeedOfMovement()
         y = -1.f;
     }
 
-    this->speedOfMovementX *= x;
-    this->speedOfMovementY *= y;
+    this->speedOfMovementX = x * standardSpeedOfMovementX;
+    this->speedOfMovementY = y * standardSpeedOfMovementY;
 }

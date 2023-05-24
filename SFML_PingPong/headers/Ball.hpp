@@ -11,8 +11,10 @@ class Ball
 {
   private:
     sf::CircleShape shape;
-    float speedOfMovementX = 500.f;
-    float speedOfMovementY = 500.f;
+    float standardSpeedOfMovementX = 500.f;
+    float standardSpeedOfMovementY = 500.f;
+    float speedOfMovementX = 0.f;
+    float speedOfMovementY = 0.f;
 
   public:
     Ball() = default;
